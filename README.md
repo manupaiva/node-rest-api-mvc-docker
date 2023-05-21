@@ -25,13 +25,13 @@ Follow these steps to install and run the application:
 1. Clone the application repository from GitHub:
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone https://github.com/manupaiva/node-rest-api-nvc-docker.git
 ```
 
 2. Navigate to the application directory:
 
 ```bash
-cd your-application-name
+cd NODEJS-REST-API
 ```
 
 ## Execution
