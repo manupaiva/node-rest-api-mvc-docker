@@ -1,4 +1,4 @@
-# RESTful API
+# REST API Simple Example
 
 This is a RESTful API example based on Node.js and MongoDB, following the **MVC pattern** i.e. Model ~~View~~ Controller.
 
@@ -6,41 +6,67 @@ This is a RESTful API example based on Node.js and MongoDB, following the **MVC 
 
 The application is **production ready**, and can be used behind a Nginx reverse proxy securely.
 
----
+## Prerequisites
 
-#### To start setting up the project
+Make sure you have the following prerequisites installed on your machine:
 
-Step 1: Clone the repo
+- Docker: [https://www.docker.com/](https://www.docker.com/)
 
-```bash
-git clone https://github.com/trulymittal/Nodejs-REST-API.git
-```
+## Configuration
 
-Step 2: cd into the cloned repo and run:
+Before running the application, make sure to configure the following files and environment variables:
 
-```bash
-npm install
-```
+- `.env`: Environment variable file for application configuration. Refer to `.env.example` file for an example and make sure to provide the appropriate values for your environment.
 
-Step 3: Put your credentials in the .env file.
+## Installation
 
-```bash
-PORT=3000
-MONGODB_URI=YOUR MONGODB URI
-DB_NAME=DATABASE NAME OF YOUR CHOICE
-DB_USER=DATABASE USER
-DB_PASS=DATABASE USER PASSWORD 
-```
+Follow these steps to install and run the application:
 
-Step 4: Start the API by
+1. Clone the application repository from GitHub:
 
 ```bash
-npm start
+git clone <REPOSITORY_URL>
 ```
+
+2. Navigate to the application directory:
+
+```bash
+cd your-application-name
+```
+
+## Execution
+
+Follow these steps to run the application:
+
+1. Build the application using Docker build:
+
+```bash
+docker build .
+```
+
+2. Start the Docker containers using Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+This will start the containers for your API and MongoDB, ensuring their connection.
+
+3. Access the API in your browser or using tools like Postman:
+
+```bash
+http://localhost:CONTAINER_PORT/
+```
+
+Make sure to replace CONTAINER_PORT with the port configured in your .env file.
+
+## Usage
+
+To use this API you have an example queries in rest.http file.
 
 ## Author
 
-- [**Truly Mittal**](https://trulymittal.com)
+- [**Manuel Paiva**](https://github.com/manupaiva)
 
 ## License
 

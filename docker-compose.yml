@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  # mongoDB services
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - ${CONTAINER_DB_PORT}:${DB_PORT}
+    volumes:
+      - mongo_db:/data/db
+
+  # Node App service
+  api:
+    build: .
+    ports:
+      - ${CONTAINER_PORT}:${PORT}
+    environment:
+      - PORT=${PORT}
+      - MONGODB_URI=${MONGODB_URI}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - AUTHOR=${AUTHOR}
+    volumes:
+      - .:/usr/src/app
+    depends_on: 
+      - mongo_db
+
+volumes:
+  mongo_db: {}
