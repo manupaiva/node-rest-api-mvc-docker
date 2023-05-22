@@ -6,17 +6,23 @@ This is a RESTful API example based on Node.js and MongoDB, following the **MVC 
 
 The application is **production ready**, and can be used behind a Nginx reverse proxy securely.
 
+</br>
+
 ## Prerequisites
 
 Make sure you have the following prerequisites installed on your machine:
 
 - Docker: [https://www.docker.com/](https://www.docker.com/)
 
+</br>
+
 ## Configuration
 
 Before running the application, make sure to configure the following files and environment variables:
 
 - `.env`: Environment variable file for application configuration. Refer to `.env.example` file for an example and make sure to provide the appropriate values for your environment.
+
+</br>
 
 ## Installation
 
@@ -34,7 +40,7 @@ git clone https://github.com/manupaiva/node-rest-api-nvc-docker.git
 cd NODEJS-REST-API
 ```
 
----
+</br>
 
 ## Execution as a single service
 
@@ -66,7 +72,7 @@ http://localhost:CONTAINER_PORT/
 
 Make sure to replace CONTAINER_PORT with the port configured in your .env file.
 
----
+</br>
 
 ## Execution as a multiples services using Nginx load balancer configuration
 
@@ -100,15 +106,19 @@ http://localhost:CONTAINER_PORT/
 
 Make sure to replace CONTAINER_PORT with the port configured in your .env file.
 
----
+</br>
 
 ## Usage
 
 To use this API you have an example queries in rest.http file.
 
+</br>
+
 ## Author
 
 - [**Manuel Paiva**](https://github.com/manupaiva)
+
+</br>
 
 ## License
 
