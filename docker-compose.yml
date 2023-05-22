@@ -10,12 +10,10 @@ services:
       - ${CONTAINER_DB_PORT}:${DB_PORT}
     volumes:
       - mongo_db:/data/db
-
-  # Node App service
+ 
+  # Node App services using Nginx configuration
   api:
     build: .
-    ports:
-      - ${CONTAINER_PORT}:${PORT}
     environment:
       - PORT=${PORT}
       - MONGODB_URI=${MONGODB_URI}
@@ -27,6 +25,33 @@ services:
       - .:/usr/src/app
     depends_on: 
       - mongo_db
+  
+  # Nginx service
+  nginx:
+      image: nginx:latest
+      volumes:
+        - ./conf.d:/etc/nginx/conf.d
+      depends_on: 
+       - api
+      ports:
+       - 4000:4000
+
+  # Node App as a simple service using docker compose up
+  # api:
+  #   build: .
+  #   ports:
+  #     - ${CONTAINER_PORT}:${PORT}
+  #   environment:
+  #     - PORT=${PORT}
+  #     - MONGODB_URI=${MONGODB_URI}
+  #     - DB_NAME=${DB_NAME}
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASS=${DB_PASS}
+  #     - AUTHOR=${AUTHOR}
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on: 
+  #     - mongo_db
 
 volumes:
   mongo_db: {}

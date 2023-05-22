@@ -34,7 +34,41 @@ git clone https://github.com/manupaiva/node-rest-api-nvc-docker.git
 cd NODEJS-REST-API
 ```
 
-## Execution
+---
+
+## Execution as a single service
+
+Follow these steps to run the application:
+
+1. Comment the api service in the docker-compose.yml file
+
+2. Discomment the single api service in the docker-compose.yml file
+
+3. Build the application using Docker build:
+
+```bash
+docker build .
+```
+
+4. Start the Docker containers using Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+This will start the containers for your API and MongoDB, ensuring their connection.
+
+5. Access the API in your browser or using tools like Postman:
+
+```bash
+http://localhost:CONTAINER_PORT/
+```
+
+Make sure to replace CONTAINER_PORT with the port configured in your .env file.
+
+---
+
+## Execution as a multiples services using Nginx load balancer configuration
 
 Follow these steps to run the application:
 
@@ -47,10 +81,16 @@ docker build .
 2. Start the Docker containers using Docker Compose:
 
 ```bash
-docker compose up -d
+docker compose up --scale api=N
 ```
 
-This will start the containers for your API and MongoDB, ensuring their connection.
+Where N is the number of containers to run. For example:
+
+```bash
+docker compose up --scale api=2
+```
+
+This will start N containers for your API and a unique instance of MongoDB, ensuring their connection.
 
 3. Access the API in your browser or using tools like Postman:
 
@@ -59,6 +99,8 @@ http://localhost:CONTAINER_PORT/
 ```
 
 Make sure to replace CONTAINER_PORT with the port configured in your .env file.
+
+---
 
 ## Usage
 

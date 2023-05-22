@@ -1,7 +1,8 @@
-const createError = require('http-errors');
-const mongoose = require('mongoose');
+const createError = require("http-errors");
+const mongoose = require("mongoose");
+const os = require("os");
 
-const Product = require('../Models/Product.model');
+const Product = require("../Models/Product.model");
 
 module.exports = {
   getAllProducts: async (req, res, next) => {
@@ -9,7 +10,11 @@ module.exports = {
       const results = await Product.find({}, { __v: 0 });
       // const results = await Product.find({}, { name: 1, price: 1, _id: 0 });
       // const results = await Product.find({ price: 699 }, {});
-      res.send(results);
+      let response = {
+        results: results,
+        hostname: os.hostname(),
+      };
+      res.send(response);
     } catch (error) {
       console.log(error.message);
     }
@@ -19,10 +24,14 @@ module.exports = {
     try {
       const product = new Product(req.body);
       const result = await product.save();
-      res.send(result);
+      let response = {
+        result: result,
+        hostname: os.hostname(),
+      };
+      res.send(response);
     } catch (error) {
       console.log(error.message);
-      if (error.name === 'ValidationError') {
+      if (error.name === "ValidationError") {
         next(createError(422, error.message));
         return;
       }
@@ -54,13 +63,17 @@ module.exports = {
       const product = await Product.findById(id);
       // const product = await Product.findOne({ _id: id });
       if (!product) {
-        throw createError(404, 'Product does not exist.');
+        throw createError(404, "Product does not exist.");
       }
-      res.send(product);
+      let response = {
+        product: product,
+        hostname: os.hostname(),
+      };
+      res.send(response);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Product id'));
+        next(createError(400, "Invalid Product id"));
         return;
       }
       next(error);
@@ -75,13 +88,17 @@ module.exports = {
 
       const result = await Product.findByIdAndUpdate(id, updates, options);
       if (!result) {
-        throw createError(404, 'Product does not exist');
+        throw createError(404, "Product does not exist");
       }
-      res.send(result);
+      let response = {
+        result: result,
+        hostname: os.hostname(),
+      };
+      res.send(response);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        return next(createError(400, 'Invalid Product Id'));
+        return next(createError(400, "Invalid Product Id"));
       }
 
       next(error);
@@ -94,16 +111,20 @@ module.exports = {
       const result = await Product.findByIdAndDelete(id);
       // console.log(result);
       if (!result) {
-        throw createError(404, 'Product does not exist.');
+        throw createError(404, "Product does not exist.");
       }
-      res.send(result);
+      let response = {
+        result: result,
+        hostname: os.hostname(),
+      };
+      res.send(response);
     } catch (error) {
       console.log(error.message);
       if (error instanceof mongoose.CastError) {
-        next(createError(400, 'Invalid Product id'));
+        next(createError(400, "Invalid Product id"));
         return;
       }
       next(error);
     }
-  }
+  },
 };
