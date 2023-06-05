@@ -1,0 +1,14 @@
+name: Github workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: new workflow template
+
+        run: echo "new workflow template from ${{ github.workflow }} triggered by ${{ github.event_name }} done bu ${{ github.actor }}"
